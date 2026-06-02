@@ -1,0 +1,23 @@
+
+version: 2
+
+sources:
+  - name: bigquery_source
+    database: glamira-dec-k23-huy
+    schema: dbt_transform
+
+    tables:
+      - name: orders
+
+models:
+    - name: transformed_orders
+      description: "Orders transformed table"
+      columns:
+          - name: order_id
+            description: "The primary key for this table"
+            tests:
+                - unique
+                - not_null
+      config:
+          materialized: table
+          alias: orders_rpt
